@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="refactoring-dev-tool:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/refactoring_dev_tool_jar</output-path>
+    <root id="archive" name="refactoring-dev-tool.jar">
+      <element id="module-output" name="refactoring-dev-tool" />
+    </root>
+  </artifact>
+</component>
