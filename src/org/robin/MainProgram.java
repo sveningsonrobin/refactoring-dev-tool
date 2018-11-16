@@ -5,13 +5,17 @@ import org.robin.configuration.implementations.JavaConfiguration;
 import org.robin.input.FileHandler;
 import org.robin.input.FilesystemModelReader;
 import org.robin.output.ModelWriter;
-import org.robin.output.implementations.ConsoleModelWriter;
+import org.robin.output.implementations.FilesystemModelWriter;
 import org.robin.transformations.Transformator;
 
 public class MainProgram {
     public static void main(String[] args) {
+        String[] files = new String[] {
+                "/Users/robin/test_file.java"
+        };
+
         MainProgram mainProgram = new MainProgram();
-        mainProgram.performRefactoring(new JavaConfiguration(), new ConsoleModelWriter(), args);
+        mainProgram.performRefactoring(new JavaConfiguration(), new FilesystemModelWriter(), files);
     }
 
     private void performRefactoring(Configuration configuration, ModelWriter writer, String[] filePaths) {
