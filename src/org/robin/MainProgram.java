@@ -10,12 +10,8 @@ import org.robin.transformations.Transformator;
 
 public class MainProgram {
     public static void main(String[] args) {
-        String[] files = new String[] {
-                "/Users/robin/test_file.java"
-        };
-
         MainProgram mainProgram = new MainProgram();
-        mainProgram.performRefactoring(new JavaConfiguration(), new FilesystemModelWriter(), files);
+        mainProgram.performRefactoring(new JavaConfiguration(), new FilesystemModelWriter(), args);
     }
 
     private void performRefactoring(Configuration configuration, ModelWriter writer, String[] filePaths) {
