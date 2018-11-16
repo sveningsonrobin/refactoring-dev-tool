@@ -2,26 +2,18 @@ package org.robin.transformations;
 
 public class TransformationRule {
     private String mFrom;
-    private String mTo;
+    private SectionTransformation[] mSectionTransformations;
 
-    public TransformationRule(String from, String to) {
+    public TransformationRule(String from, SectionTransformation... sectionTransformations) {
         mFrom = from;
-        mTo = to;
+        mSectionTransformations = sectionTransformations;
     }
 
     public String getFrom() {
         return mFrom;
     }
 
-    public void setFrom(String from) {
-        mFrom = from;
-    }
-
-    public String getTo() {
-        return mTo;
-    }
-
-    public void setTo(String to) {
-        mTo = to;
+    public SectionTransformation[] getSectionTransformations() {
+        return mSectionTransformations;
     }
 }

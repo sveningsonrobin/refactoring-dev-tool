@@ -29,15 +29,61 @@ public class Transformator {
 
     private String transformLine(String line) {
         for (TransformationRule rule : TransformationRuleDefinition.TRANSFORMATIONS) {
-            String fromRegex = rule.getFrom();
-            String toRegex = rule.getTo();
-
-            Pattern pattern = Pattern.compile(fromRegex);
-            Matcher matcher = pattern.matcher(line);
-
-            line = matcher.replaceAll(toRegex);
+            line = applyRegex(line, rule);
         }
 
         return line;
+    }
+
+    private String applyRegex(String line, TransformationRule rule) {
+        Pattern pattern = Pattern.compile(rule.getFrom());
+        Matcher matcher = pattern.matcher(line);
+
+        boolean isFound = matcher.find();
+
+        if (isFound) {
+            String transformed = applySectionTransformation(matcher, rule.getSectionTransformations());
+            String replaced = matcher.replaceFirst(transformed);
+
+            return applyRegex(replaced, rule);
+        } else {
+            return line;
+        }
+    }
+
+    private String applySectionTransformation(Matcher matcher, SectionTransformation[] sectionTransformations) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int groupNumber = 1;
+
+        for (SectionTransformation sectionTransformation : sectionTransformations) {
+            boolean isText = sectionTransformation.isText();
+
+            if (isText) {
+                stringBuilder.append(sectionTransformation.getText());
+            } else {
+                String groupValue = matcher.group(groupNumber);
+                GroupTransformationMethod method = sectionTransformation.getMethod();
+
+                String transformedGroup = applyGroupTransformationMethod(groupValue, method);
+                stringBuilder.append(transformedGroup);
+
+                groupNumber += 1;
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
+    private String applyGroupTransformationMethod(String groupValue, GroupTransformationMethod method) {
+        switch (method) {
+            case UPPERCASE:
+                return groupValue.toUpperCase();
+            case LOWERCASE:
+                return groupValue.toLowerCase();
+            case NO_CHANGE:
+            default:
+                return groupValue;
+        }
     }
 }
