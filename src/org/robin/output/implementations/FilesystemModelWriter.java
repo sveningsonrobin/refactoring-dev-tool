@@ -34,10 +34,7 @@ public class FilesystemModelWriter implements ModelWriter {
 
         if (isYesAnswer) {
             System.out.println("Saving file...");
-
-            String content = FileUtility.getNewLineSeparatedLines(file);
-            FilesystemUtility.saveFile(file.getPath(), content);
-
+            FilesystemUtility.saveFile(file.getPath(), fileContent);
             System.out.println("File saved.");
         } else {
             System.out.println("Not saving file.");
