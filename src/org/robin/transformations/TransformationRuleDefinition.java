@@ -48,6 +48,14 @@ public class TransformationRuleDefinition {
                     SectionTransformation.byMethod(GroupTransformationMethod.LOWERCASE),
                     SectionTransformation.byMethod(GroupTransformationMethod.NO_CHANGE),
                     SectionTransformation.byText("(")
-            )
+            ),
+            new TransformationRule(
+                    "([a-zA-Z0-9]*)([_])([a-zA-Z])([A-Za-z0-9]*)\\(",
+                    SectionTransformation.byMethod(GroupTransformationMethod.NO_CHANGE),
+                    SectionTransformation.byMethod(GroupTransformationMethod.REMOVE_CHAR),
+                    SectionTransformation.byMethod(GroupTransformationMethod.UPPERCASE),
+                    SectionTransformation.byMethod(GroupTransformationMethod.NO_CHANGE),
+                    SectionTransformation.byText("(")
+            ),
     };
 }

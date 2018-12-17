@@ -81,6 +81,8 @@ public class Transformator {
                 return groupValue.toUpperCase();
             case LOWERCASE:
                 return groupValue.toLowerCase();
+            case REMOVE_CHAR:
+                return "";
             case NO_CHANGE:
             default:
                 return groupValue;
